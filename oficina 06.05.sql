@@ -268,3 +268,21 @@ select f.nomeFuncionario, s.nomeServico from funcionario f, servico s, itens_os 
 	f.idFuncionario = o.idFuncionario and
     o.idOS = x.idOS and
     s.idServico = x.idServico;
+    
+-- JOIN:
+
+-- Listar os serviços realizados por um determinado departamento:
+select d.idDepartamento, d.nomeDepartamento, s.nomeServico from servico s inner join Itens_OS i ON i.idServico = s.idServico 
+	inner join OS os ON i.idOS= os.idOS
+    inner join Departamento d ON d.idDepartamento = os.idDepartamento
+    and d.idDepartamento = 3;
+
+-- Listar os funcionários que já realizaram algum tipo de serviço:
+select f.idFuncionario, f.nomeFuncionario, s.nomeServico from servico s inner join Itens_OS i ON i.idServico = s.idServico
+	inner join OS os ON i.idOS = os.idOS
+    inner join Funcionario f ON f.idFuncionario = os.idFuncionario;
+     
+-- Saber quais clientes já realizaram determinado serviço:
+select c.idCliente, c.nomeCliente, s.nomeServico from servico s inner join Itens_OS i ON i.idServico = s.idServico
+	inner join OS os ON i.idOS = os.idOS
+    inner join Cliente c ON c.idCliente = os.idCliente;
