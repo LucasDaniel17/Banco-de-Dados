@@ -122,7 +122,7 @@ CREATE INDEX idx_idAutor on AUTOR_HAS_LIVRO (idAutor);
 CREATE INDEX idx_idEditora on EDITORA (idEditora);
 CREATE INDEX idx_idCadastroLocacao on CADASTRO_LOCACAO (idCadastroLocacao);
 
--- SELECT:
+-- SELECTs TABELA INTEIRA:
 
 Select * from BIBLIOTECA;
 Select * from ENDERECO;
@@ -187,3 +187,22 @@ insert into AUTOR_HAS_LIVRO (idAutor, idLivro)
 	values (1, 1),
 		   (2, 2),
            (3, 3);
+           
+-- QUERRYs:
+
+Select nomeUsuario from Usuario;
+Select nomeLivro from Livro;
+
+Select f.nomeFuncionario, f.cpfFuncionario, e.cepEndereco from Funcionario f, Endereco e;
+
+Select c.idCadastroLocacao, u.nomeUsuario, f.nomeFuncionario from Cadastro_Locacao c, Usuario u, Funcionario f where
+	u.idUsuario = c.idUsuario and
+    c.idFuncionario = f.idFuncionario;
+
+Select idEndereco, ruaEndereco from Endereco where ruaEndereco like 'rua%';
+
+-- JOIN:
+
+Select l.idLivro, a.nomeAutor, l.nomeLivro, e.nomeEditora from Autor a inner join Autor_Has_Livro al ON a.idAutor = al.idAutor
+	inner join Livro l ON al.idLivro = l.idLivro
+    inner join Editora e ON l.idEditora = e.idEditora;
