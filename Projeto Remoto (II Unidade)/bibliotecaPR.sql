@@ -79,12 +79,13 @@ CREATE TABLE AUTOR (
 );
 
 CREATE TABLE AUTOR_HAS_LIVRO (
-	idAutor INT,
+	idAutor INT NOT NULL,
     constraint fk_idAutor_AutorHasLivro foreign key (idAutor)
 		references AUTOR (idAutor),
-	idLivro INT,
+	idLivro INT NOT NULL,
     constraint fk_idLivro_AutorHasLivro foreign key (idLivro)
-		references LIVRO (idLivro)
+		references LIVRO (idLivro),
+	PRIMARY KEY (idAutor, idLivro)
 );
 
 CREATE TABLE EDITORA (
@@ -106,3 +107,30 @@ CREATE TABLE CADASTRO_LOCACAO (
     constraint fk_idFuncionario_CadastroLocacao foreign key (idFuncionario)
 		references FUNCIONARIO (idFuncionario)
 );
+
+-- INDEX:
+
+CREATE INDEX idx_IdBiblioteca on BIBLIOTECA (idBiblioteca);
+CREATE INDEX idx_IdEndereco on ENDERECO (idEndereco);
+CREATE INDEX idx_IdTelefone on TELEFONE (idTelefone);
+CREATE INDEX IDX_idFuncionario on FUNCIONARIO (idFuncionario);
+CREATE INDEX idx_idUsuario on USUARIO (idUsuario);
+CREATE INDEX idx_idLivro on LIVRO (idLivro);
+CREATE INDEX idx_idAutor on AUTOR (idAutor);
+CREATE INDEX idx_idLivro on AUTOR_HAS_LIVRO (idLivro); 
+CREATE INDEX idx_idAutor on AUTOR_HAS_LIVRO (idAutor);
+CREATE INDEX idx_idEditora on EDITORA (idEditora);
+CREATE INDEX idx_idCadastroLocacao on CADASTRO_LOCACAO (idCadastroLocacao);
+
+-- SELECT:
+
+Select * from BIBLIOTECA;
+Select * from ENDERECO;
+Select * from TELEFONE;
+Select * from FUNCIONARIO;
+Select * from USUARIO;
+Select * from LIVRO;
+Select * from AUTOR;
+Select * from AUTOR_HAS_LIVRO;
+Select * from EDITORA;
+Select * from CADASTRO_LOCACAO;
