@@ -134,3 +134,56 @@ Select * from AUTOR;
 Select * from AUTOR_HAS_LIVRO;
 Select * from EDITORA;
 Select * from CADASTRO_LOCACAO;
+
+-- INSERTs:
+
+insert into ENDERECO (bairroEndereco, ruaEndereco, numeroEndereco, cepEndereco, cidadeEndereco)
+	values ("Centro", "Getúlio Vargas", "312", "48702-098", "Paulo Afonso"),
+		   ("Perpetuo Socorro", "Joana Angélica", "270", "48602-063", "Paulo Afonso"),
+           ("Centro", "Rua A", "21", "48706-002", "Paulo Afonso"),
+           ("Centro", "Rua B", "872", "48706-094", "Paulo Afonso"),
+           ("Centro", "Rua C", "78", "48706-006", "Paulo Afonso"),
+           ("Centro", "Rua D", "12", "48706-041", "Paulo Afonso"),
+           ("Prainha", "Hebert de Souza", "43", "48799-024", "Paulo Afonso");
+
+insert into BIBLIOTECA (nomeBiblioteca, tipoBiblioteca, idEndereco)
+	values ("Livraria Feliz", "Matriz", 1);
+    
+insert into FUNCIONARIO (nomeFuncionario, cpfFuncionario, idBiblioteca, idEndereco)
+	values ("Adriano", "921724202", 1, 3),
+		   ("Maria", "233721639", 1, 4),
+           ("Joaquim", "726229912", 1, 5);
+           
+insert into USUARIO (nomeUsuario, cpfUsuario, emailUsuario, idEndereco)
+	values ("Lucas", "0273129042", "daniel@gmail.com", 2),
+		   ("Cicero", "342340575", "ricardo@live.com", 6),
+           ("Igor", "8721742920", "prof_igor@outlook.com", 7);
+           
+insert into TELEFONE (dddTelefone, numeroTelefone, idBiblioteca, idFuncionario, idUsuario)
+	values ("75", "982742679", 1, 1, 1),
+		   ("75", "328120428", 1, 2, 2),
+           ("75", "818292947", 1, 3, 3);
+
+insert into CADASTRO_LOCACAO (dataLocacao, dataDevolucao, descricaoLocacao, idUsuario, idFuncionario)
+	values ("12/03/2022", "19/03/2022", "Devolvido em bom estado", 1, 3),
+		   ("23/06/2022", "30/06/2022", "Devolvido em mau estado", 2, 1),
+           ("06/05/2022", "13/05/2022", "Estado original", 3, 2);
+           
+insert into AUTOR (nomeAutor, cpfAutor) 
+	values ("Machado de Assis", "123456789"),
+		   ("Jonas Madureira", "987654321"),
+           ("Clarice Lispector", "123456789");
+
+insert into EDITORA (nomeEditora, cnpjEditora, emailEditora)
+	values ("Thomas Nelson", "81272", "thomasnelson@outlook.com"),
+		   ("Editora Aleatoria", "21403", "aleatoria@gmail.com");
+
+insert into LIVRO (nomeLivro, anoPublicacao, categoriaLivro, idEditora, idCadastroLocacao)
+	values ("Dom Casmurro", "1950", "Clássicos", 1, 1),
+		   ("Inteligencia Humilhada", "2018", "Cristão", 2, 2),
+           ("Harry Potter", "2008", "Ficção", 2, 3);
+
+insert into AUTOR_HAS_LIVRO (idAutor, idLivro)
+	values (1, 1),
+		   (2, 2),
+           (3, 3);
