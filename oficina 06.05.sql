@@ -286,3 +286,7 @@ select f.idFuncionario, f.nomeFuncionario, s.nomeServico from servico s inner jo
 select c.idCliente, c.nomeCliente, s.nomeServico from servico s inner join Itens_OS i ON i.idServico = s.idServico
 	inner join OS os ON i.idOS = os.idOS
     inner join Cliente c ON c.idCliente = os.idCliente;
+    
+-- Funções de agregação:
+Select max(idCliente) from cliente;
+Select min(idCliente) from cliente;
