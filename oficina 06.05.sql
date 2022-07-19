@@ -289,4 +289,12 @@ select c.idCliente, c.nomeCliente, s.nomeServico from servico s inner join Itens
     
 -- Funções de agregação:
 Select max(idCliente) from cliente;
+
 Select min(idCliente) from cliente;
+
+Select COUNT(idCliente) from cliente;
+Select COUNT(DISTINCT idFuncionario) from OS;
+
+Select AVG (idCliente) AS MediaCliente from cliente;
+
+Select idFuncionario, COUNT(*) from OS Group by idFuncionario;
