@@ -298,3 +298,9 @@ Select COUNT(DISTINCT idFuncionario) from OS;
 Select AVG (idCliente) AS MediaCliente from cliente;
 
 Select idFuncionario, COUNT(*) from OS Group by idFuncionario;
+
+-- Departamento que tenha mais de duas OS registradas:
+Select idOS, idDepartamento from os GROUP BY idOS having idDepartamento > 2;
+
+Select D.idDepartamento, D.nomeDepartamento, count(*) AS quantidade from  Departamento D join os O on (D.idDepartamento = O.idDepartamento) 
+	GROUP BY D.nomeDepartamento having quantidade > 1;
