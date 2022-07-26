@@ -304,3 +304,6 @@ Select idOS, idDepartamento from os GROUP BY idOS having idDepartamento > 2;
 
 Select D.idDepartamento, D.nomeDepartamento, count(*) AS quantidade from  Departamento D join os O on (D.idDepartamento = O.idDepartamento) 
 	GROUP BY D.nomeDepartamento having quantidade > 1;
+    
+Select D.nomeDepartamento, (select count(idDepartamento) from os O where O.idDepartamento = D.idDepartamento) AS quantidade from Departamento D
+	GROUP BY D.idDepartamento;
