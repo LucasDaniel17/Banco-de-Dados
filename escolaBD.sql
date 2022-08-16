@@ -15,3 +15,33 @@ Select a.nome_aluno from aluno a where a.nome_Aluno not in (select a.id_Aluno fr
 -- C) ALUNOS QUE CURSAM MENOS DE 2 DISCIPLINAS (subquery como fonte de dados)
 Select x.nome_aluno, x.Quantidade_Disciplina from (select a.nome_Aluno, (select count(d.nome_disciplina) from disciplina d, notas n where 
 	a.id_Aluno = n.id_Aluno and d.ID_DISCIPLINA = n.id_Disciplina) AS Quantidade_Disciplina from aluno a group by a.id_aluno) x where x.Quantidade_Disciplina < 2;
+    
+-- STORED PROCEDURES:
+DELIMITER $$
+
+CREATE PROCEDURE LISTAR_aLUNOS (IN quantidade INT)
+BEGIN
+	select *  from ALUNO limit quantidade;
+END $$
+
+DELIMITER ;
+
+call LISTAR_ALUNOS(5);
+
+
+DELIMITER $$
+
+CREATE PROCEDURE ANALISE_NOTAS (OUT NOME VARCHAR(120), OUT MAX_NOTA DOUBLE, IN IDALUNO INT)
+BEGIN
+	select nome_aluno INTO NOME from aluno where ID_ALUNO = IDALUNO;
+    select max(nota) INTO MAX_NOTA from notas N where N.ID_ALUNO = IDALUNO;
+END $$
+
+DELIMITER ;
+
+SET @NOME = "";
+SET @MAX_NOTA = 0;
+
+call ANALISE_NOTAS(@NOME, @MAX_NOTA, 2);
+
+select @NOME, @MAX_NOTA;
