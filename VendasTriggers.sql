@@ -22,6 +22,8 @@ insert into produtos (descricao, estoque_produto, preco_produto) value ("feijão
 
 select * from produtos;
 
+Insert into VENDA (numero_venda, id_produto, quantidade) value (10, 1, 15);
+
 DELIMITER $$
 
 CREATE TRIGGER ATUALIZAR_ESTOQUE AFTER INSERT ON VENDA
