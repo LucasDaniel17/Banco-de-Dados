@@ -45,3 +45,19 @@ SET @MAX_NOTA = 0;
 call ANALISE_NOTAS(@NOME, @MAX_NOTA, 2);
 
 select @NOME, @MAX_NOTA;
+
+DELIMITER $$
+
+CREATE PROCEDURE SOMA (INOUT A INT, IN B INT) 
+	BEGIN
+		SET A = B + A;
+	END $$
+
+DELIMITER ;
+
+SET @A = 20;
+SET @B = 10;
+
+call soma(@A, @B);
+
+select @A;
