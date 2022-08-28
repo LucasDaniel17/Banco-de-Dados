@@ -242,5 +242,22 @@ Select x.nomeAutor, x.Quantidade_Livros from (select a.nomeAutor, (select count(
     Quantidade_Livros from autor a group by a.idAutor) x where x.Quantidade_Livros < 1;
 
 -- 3.1) Procedure sem parâmetro
+DELIMITER $$
+CREATE PROCEDURE LISTAR_USUARIOS ()
+BEGIN 
+	select * from Usuario;
+END $$
+DELIMITER ;
+
+CALL LISTAR_USUARIOS;
 
 -- 3.2) Procedure com parâmetro
+DELIMITER $$
+CREATE PROCEDURE QUANTIDADE_CadastroLocacao (OUT quantidade INT)
+BEGIN
+	select COUNT(*) into quantidade from cadastro_locacao;
+END $$
+DELIMITER ;
+
+CALL QUANTIDADE_CadastroLocacao(@total);
+select @total;
