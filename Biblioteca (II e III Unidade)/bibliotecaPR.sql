@@ -180,7 +180,9 @@ insert into CADASTRO_LOCACAO (dataLocacao, dataDevolucao, descricaoLocacao, idUs
 insert into AUTOR (nomeAutor, cpfAutor) 
 	values ("Machado de Assis", "123456789"),
 		   ("Jonas Madureira", "987654321"),
-           ("Clarice Lispector", "123456789");
+           ("Clarice Lispector", "123456789"),
+           ("Guimarães Rosa", "0819232302"),
+           ("C.S. Lewis", "4438429323");
 
 insert into EDITORA (nomeEditora, cnpjEditora, emailEditora)
 	values ("Thomas Nelson", "81272", "thomasnelson@outlook.com"),
@@ -189,12 +191,16 @@ insert into EDITORA (nomeEditora, cnpjEditora, emailEditora)
 insert into LIVRO (nomeLivro, anoPublicacao, categoriaLivro, quantidadeLivro, idEditora)
 	values ("Dom Casmurro", "1950", "Clássicos", 10, 1),
 		   ("Inteligencia Humilhada", "2018", "Cristão", 5, 2),
-           ("Harry Potter", "2008", "Ficção", 7, 2);
+           ("Harry Potter", "2008", "Ficção", 7, 2),
+           ("Crônicas de Narnia", "1940", "Fantastico", 22, 1),
+           ("Cristianismo Puro e Simples", "1945", "Cristão", 17, 1);
 
 insert into AUTOR_HAS_LIVRO (idAutor, idLivro)
 	values (1, 1),
 		   (2, 2),
-           (3, 3);
+           (3, 3),
+           (5, 4),
+           (5, 5);
            
 insert into CADASTRO_LOCACAO_HAS_LIVRO (idCadastroLocacao, idLivro)
 	values (1, 3),
@@ -222,3 +228,19 @@ Select l.idLivro, a.nomeAutor, l.nomeLivro, e.nomeEditora from Autor a inner joi
     
 
 -- AVAL. III Unidade:
+
+-- 2.1) SubQuery como coluna (quantidade de livros que cada autor possui)
+Select a.nomeAutor, (select COUNT(l.nomeLivro) from livro l, autor_has_livro al where a.idAutor = al.idAutor 
+	and l.idLivro = al.idLivro) AS Quantidade_Livros from autor a;
+
+-- 2.2) SubQuery como filtro (autor que não tem nenhum livro)
+Select a.nomeAutor from Autor a where a.idAutor not in (select al.idAutor from autor_has_livro al); 
+
+-- 2.3) SubQuery como fonte de dados (autores que possuem mais de um livro)
+Select x.nomeAutor, x.Quantidade_Livros from (select a.nomeAutor, (select count(l.nomeLivro) from 
+	livro l, autor_has_livro al where a.idAutor = al.idAutor and l.idLivro = al.idLivro) AS 
+    Quantidade_Livros from autor a group by a.idAutor) x where x.Quantidade_Livros < 1;
+
+-- 3.1) Procedure sem parâmetro
+
+-- 3.2) Procedure com parâmetro
