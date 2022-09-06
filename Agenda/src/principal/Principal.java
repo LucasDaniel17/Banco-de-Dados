@@ -8,7 +8,12 @@ public class Principal {
 	public static void main(String[] args) {
 		Categoria c = new Categoria("Teste");
 		ColecaoCategoria cg = new ColecaoCategoria();
+		Categoria c2 = new Categoria (1, "Teste2");
+		Categoria c3 = new Categoria (1);
+		
 		
 		cg.adicionarCategoria(c);
+		cg.update(c2);
+		cg.deletar(c2);
 	}
 }

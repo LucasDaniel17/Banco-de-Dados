@@ -16,4 +16,25 @@ public class ColecaoCategoria {
 			e.printStackTrace();
 		}
 	}
+	
+	public void update (Categoria c) {
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("update Categoria set nome = ? where id = ?");
+			stmt.setString(1, c.getNome());
+			stmt.setInt(2, c.getId());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deletar (Categoria c) {
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("delete from Categoria where id = ?");
+			stmt.setInt(1, c.getId());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
