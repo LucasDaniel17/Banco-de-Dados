@@ -12,8 +12,13 @@ public class Principal {
 		Categoria c3 = new Categoria (1);
 		
 		
-		cg.adicionarCategoria(c);
-		cg.update(c2);
-		cg.deletar(c2);
+		//cg.adicionarCategoria(c);
+		//cg.update(c2);
+		//cg.deletar(c2);
+		
+		//cg.listarCategoria().forEach(System.out::println);
+		
+		System.out.println(cg.procurarCategoriaId(5));
+		System.out.println(cg.procurarCategoriaNome("Familia"));
 	}
 }

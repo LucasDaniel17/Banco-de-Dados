@@ -1,7 +1,10 @@
 package br.edu.ifba.agenda.colecao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifba.agenda.basicas.Categoria;
 
@@ -36,5 +39,61 @@ public class ColecaoCategoria {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Categoria> listarCategoria () {
+		List<Categoria> categorias = new ArrayList<Categoria>();
+		
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from Categoria");			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Categoria c = new Categoria();
+				c.setId(rs.getInt("id"));
+				c.setNome(rs.getString("nome"));
+				categorias.add(c);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		 return categorias;
+	}
+	
+	public Categoria procurarCategoriaId(int id) {
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from categoria where id = ?");
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				Categoria c = new Categoria();
+				c.setId(rs.getInt("id"));
+				c.setNome(rs.getString("nome"));
+				return c;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Categoria procurarCategoriaNome(String nome) {
+		try {
+			PreparedStatement stmt = Conexao.getConnection().prepareStatement("select * from categoria where nome = ?");
+			stmt.setString(1, nome);
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				Categoria c = new Categoria();
+				c.setId(rs.getInt("id"));
+				c.setNome(rs.getString("nome"));
+				return c;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
