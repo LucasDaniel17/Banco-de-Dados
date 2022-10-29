@@ -65,7 +65,7 @@ create table Galeria (
     nomeGaleria varchar(45) not null,
 	descricaoGaleria  varchar(45) not null,
     idGincana int,
-    constraint fk_idGincana_Prova foreign key (idGincana) 
+    constraint fk_idGincana_Galeria foreign key (idGincana) 
 		references Gincana(idGincana)
 );
 
@@ -118,10 +118,42 @@ create table NotasCriterio (
 
 create table Jurado_has_Prova (
 	idJurado int,
-    constraint fk_idJurado_NotasCriterio foreign key (idJurado)
+    constraint fk_idJurado_JuradoProva foreign key (idJurado)
 		references Jurado(idJurado),
 	idProva int,
-    constraint fk_idProva_Criterio foreign key (idProva)
+    constraint fk_idProva_JuradoProva foreign key (idProva)
 		references Prova(idProva),
 	primary key (idJurado, idProva)
 );
+
+-- INDEX:
+CREATE INDEX idx_IdAgenda on AGENDA (idAgenda);
+CREATE INDEX idx_IdCriterio on CRITERIO (idCriterio);
+CREATE INDEX idx_IdEquipe on EQUIPE (idEquipe);
+CREATE INDEX IDX_idEvento on EVENTO (idEvento);
+CREATE INDEX idx_idGaleria on GALERIA (idGaleria);
+CREATE INDEX idx_idGincana on GINCANA (idGincana);
+CREATE INDEX idx_idImagem on IMAGEM (idImagem);
+CREATE INDEX idx_idJurado on JURADO (idJurado); 
+CREATE INDEX idx_idJurado on JURADO_HAS_PROVA (idJurado);
+CREATE INDEX idx_idProva on JURADO_HAS_PROVA (idProva);
+CREATE INDEX idx_idCriterio on NOTASCRITERIO (idCriterio);
+CREATE INDEX idx_idJurado on NOTASCRITERIO (idJurado);
+CREATE INDEX idx_idPerfil on PERFIL (idPerfil);
+CREATE INDEX idx_idProva on PROVA (idProva);
+CREATE INDEX idx_idUsuario on USUARIO (idUsuario);
+
+-- SELECTs TABELA INTEIRA:
+Select * from AGENDA;
+Select * from CRITERIO;
+Select * from EQUIPE;
+Select * from EVENTO;
+Select * from GALERIA;
+Select * from GINCANA;
+Select * from IMAGEM;
+Select * from JURADO;
+Select * from JURADO_HAS_PROVA;
+Select * from NOTASCRITERIO;
+Select * from PERFIL;
+Select * from PROVA;
+Select * from USUARIO;
