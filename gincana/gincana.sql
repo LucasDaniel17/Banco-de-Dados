@@ -3,23 +3,34 @@ create database gincana;
 use gincana;
 
 create table Gincana (
-	idGincana int auto_increment not null primary key,
-	nomeGincana varchar(45) not null,
-	anoGincana varchar(8) not null,
-    descricaoGincana varchar(120) not null,
-    dataGincana varchar(45) not null
+	id_Gincana int auto_increment not null primary key,
+	nome_Gincana varchar(45) not null,
+	ano_Gincana varchar(8) not null,
+    descricao_Gincana varchar(120) not null,
+    data_Gincana varchar(45) not null
+);
+
+create table Agenda (
+	id_Agenda int auto_increment not null primary key,
+    data_Agenda date not null,
+    id_Gincana int,
+    constraint fk_idGincana_Agenda foreign key (id_Gincana) 
+		references Gincana(id_Gincana)
 );
 
 create table Evento (
-	idEvento int auto_increment not null primary key,
-    nomeEvento varchar(45) not null,
-    localEvento varchar(45) not null,
-    dataEvento date not null,
-    horarioEvento varchar(5) not null,
-    descricaoEvento varchar(120) not null,
-    idGincana int,
-    constraint fk_idGincana_Evento foreign key (idGincana) 
-		references Gincana(idGincana)
+	id_Evento int auto_increment not null primary key,
+    nome_Evento varchar(45) not null,
+    local_Evento varchar(45) not null,
+    data_Evento date not null,
+    horario_Evento varchar(5) not null,
+    descricao_Evento varchar(120) not null,
+    id_Gincana int,
+    constraint fk_idGincana_Evento foreign key (id_Gincana) 
+		references Gincana(id_Gincana),
+	id_Agenda int,
+    constraint fk_idAgenda_Evento foreign key (id_Agenda)
+		references Agenda(id_Agenda)
 );
 
 create table Perfil (
@@ -28,76 +39,68 @@ create table Perfil (
 );
 
 create table Usuario (
-	idUsuario int auto_increment not null primary key,
-    nomeUsuario varchar(60) not null,
-	emailUsuario varchar(60) not null,
-    senhaUsuario varchar(30) not null,
-    cpfUsuario varchar(15) not null,
-    sexoUsuario varchar(1) not null,
-    idGincana int,
-    constraint fk_idGincana_Usuario foreign key (idGincana) 
-		references Gincana(idGincana),
+	id_Usuario int auto_increment not null primary key,
+    nome_Usuario varchar(60) not null,
+	email_Usuario varchar(60) not null,
+    senha_Usuario varchar(30) not null,
+    cpf_Usuario varchar(15) not null,
+    sexo_Usuario varchar(1) not null,
+    id_Gincana int,
+    constraint fk_idGincana_Usuario foreign key (id_Gincana) 
+		references Gincana(id_Gincana),
 	idPerfil int,
     constraint fk_idPerfil_Usuario foreign key (idPerfil)
 		references Perfil(idPerfil)
 );
 
 create table Equipe (
-	idEquipe int auto_increment not null primary key,
-    nomeEquipe varchar(45) not null,
-    cursoEquipe varchar(15) not null,
-    represetanteEquipe varchar(45) not null,
-    idGincana int,
-    constraint fk_idGincana_Equipe foreign key (idGincana) 
-		references Gincana(idGincana)
-);
-
-create table Agenda (
-	idAgenda int auto_increment not null primary key,
-    dataAgenda date not null,
-    idGincana int,
-    constraint fk_idGincana_Agenda foreign key (idGincana) 
-		references Gincana(idGincana)
+	id_Equipe int auto_increment not null primary key,
+    nome_Equipe varchar(45) not null,
+    curso_Equipe varchar(15) not null,
+    represetante_Equipe varchar(45) not null,
+    id_Gincana int,
+    constraint fk_idGincana_Equipe foreign key (id_Gincana) 
+		references Gincana(id_Gincana)
 );
 
 create table Galeria (
-	idGaleria int auto_increment not null primary key,
-    nomeGaleria varchar(45) not null,
-	descricaoGaleria  varchar(45) not null,
-    idGincana int,
-    constraint fk_idGincana_Galeria foreign key (idGincana) 
-		references Gincana(idGincana)
+	id_Galeria int auto_increment not null primary key,
+    nome_Galeria varchar(45) not null,
+	descricao_Galeria  varchar(45) not null,
+    id_Gincana int,
+    constraint fk_idGincana_Galeria foreign key (id_Gincana) 
+		references Gincana(id_Gincana)
 );
 
 create table Imagem (
-	idImagem int auto_increment not null primary key,
-    imagemURL varchar(100) not null,
-    idGaleria int,
-    constraint fk_idGaleria_Imagem foreign key (idGaleria)
-		references Galeria(idGaleria)
+	id_Imagem int auto_increment not null primary key,
+    imagem_URL varchar(100) not null,
+    id_Galeria int,
+    constraint fk_idGaleria_Imagem foreign key (id_Galeria)
+		references Galeria(id_Galeria)
 );
 
 create table Prova (
-	idProva int auto_increment not null primary key,
-    nomeProva varchar(30) not null,
-	descricaoProva  varchar(120) not null,
-    dataProva DATE  not null,
-    horarioProva varchar(5) not null,
-    idGincana int,
-    constraint fk_idGincana_Prova foreign key (idGincana) 
-		references Gincana(idGincana),
-	idAgenda int,
-    constraint fk_idAgenda_Prova foreign key (idAgenda)
-		references Agenda(idAgenda)
+	id_Prova int auto_increment not null primary key,
+    nome_Prova varchar(30) not null,
+	descricao_Prova  varchar(120) not null,
+    data_Prova DATE  not null,
+    horario_Prova varchar(5) not null,
+    id_Gincana int,
+    constraint fk_idGincana_Prova foreign key (id_Gincana) 
+		references Gincana(id_Gincana),
+	id_Agenda int,
+    constraint fk_idAgenda_Prova foreign key (id_Agenda)
+		references Agenda(id_Agenda)
 );
 
 create table Criterio (
-	idCriterio int auto_increment not null primary key,
-    nomeCriterio varchar(30) not null,
-	pontuacaoCriterio  varchar(45) not null,
-	idProva int,
-    constraint fk_idProva_Criterio foreign key (idProva)
-		references Prova(idProva)
+	id_Criterio int auto_increment not null primary key,
+    nome_Criterio varchar(30) not null,
+	pontuacao_Criterio  varchar(45) not null,
+	id_Prova int,
+    constraint fk_idProva_Criterio foreign key (id_Prova)
+		references Prova(id_Prova)
 );
 
 create table Jurado (
@@ -106,42 +109,45 @@ create table Jurado (
 );
 
 create table NotasCriterio (
-	idCriterio int,
-    constraint fk_idCriterio_NotasCriterio foreign key (idCriterio)
-		references Criterio(idCriterio),
-	idJurado int,
-    constraint fk_idJurado_NotasCriterio foreign key (idJurado)
-		references Jurado(idJurado),
-	primary key (idCriterio, idJurado),
-    notasCriterios varchar(10) not null
+	id_Criterio int,
+    constraint fk_idCriterio_NotasCriterio foreign key (id_Criterio)
+		references Criterio(id_Criterio),
+	id_Jurado int,
+    constraint fk_idJurado_NotasCriterio foreign key (id_Jurado)
+		references Jurado(id_Jurado),
+	primary key (id_Criterio, id_Jurado),
+    notas_Criterios varchar(10) not null,
+    id_Equipe int,
+    constraint fk_Equipe_NotasCriterio foreign key (id_Equipe)
+		references Equipe(id_Equipe)
 );
 
 create table Jurado_has_Prova (
-	idJurado int,
-    constraint fk_idJurado_JuradoProva foreign key (idJurado)
-		references Jurado(idJurado),
-	idProva int,
-    constraint fk_idProva_JuradoProva foreign key (idProva)
-		references Prova(idProva),
-	primary key (idJurado, idProva)
+	id_Jurado int,
+    constraint fk_idJurado_JuradoProva foreign key (id_Jurado)
+		references Jurado(id_Jurado),
+	id_Prova int,
+    constraint fk_idProva_JuradoProva foreign key (id_Prova)
+		references Prova(id_Prova),
+	primary key (id_Jurado, id_Prova)
 );
 
 -- INDEX:
-CREATE INDEX idx_IdAgenda on AGENDA (idAgenda);
-CREATE INDEX idx_IdCriterio on CRITERIO (idCriterio);
-CREATE INDEX idx_IdEquipe on EQUIPE (idEquipe);
-CREATE INDEX IDX_idEvento on EVENTO (idEvento);
-CREATE INDEX idx_idGaleria on GALERIA (idGaleria);
-CREATE INDEX idx_idGincana on GINCANA (idGincana);
-CREATE INDEX idx_idImagem on IMAGEM (idImagem);
-CREATE INDEX idx_idJurado on JURADO (idJurado); 
-CREATE INDEX idx_idJurado on JURADO_HAS_PROVA (idJurado);
-CREATE INDEX idx_idProva on JURADO_HAS_PROVA (idProva);
-CREATE INDEX idx_idCriterio on NOTASCRITERIO (idCriterio);
-CREATE INDEX idx_idJurado on NOTASCRITERIO (idJurado);
-CREATE INDEX idx_idPerfil on PERFIL (idPerfil);
-CREATE INDEX idx_idProva on PROVA (idProva);
-CREATE INDEX idx_idUsuario on USUARIO (idUsuario);
+CREATE INDEX idx_IdAgenda on AGENDA (id_Agenda);
+CREATE INDEX idx_IdCriterio on CRITERIO (id_Criterio);
+CREATE INDEX idx_IdEquipe on EQUIPE (id_Equipe);
+CREATE INDEX IDX_idEvento on EVENTO (id_Evento);
+CREATE INDEX idx_idGaleria on GALERIA (id_Galeria);
+CREATE INDEX idx_idGincana on GINCANA (id_Gincana);
+CREATE INDEX idx_idImagem on IMAGEM (id_Imagem);
+CREATE INDEX idx_idJurado on JURADO (id_Jurado); 
+CREATE INDEX idx_idJurado on JURADO_HAS_PROVA (id_Jurado);
+CREATE INDEX idx_idProva on JURADO_HAS_PROVA (id_Prova);
+CREATE INDEX idx_idCriterio on NOTASCRITERIO (id_Criterio);
+CREATE INDEX idx_idJurado on NOTASCRITERIO (id_Jurado);
+CREATE INDEX idx_idPerfil on PERFIL (id_Perfil);
+CREATE INDEX idx_idProva on PROVA (id_Prova);
+CREATE INDEX idx_idUsuario on USUARIO (id_Usuario);
 
 -- SELECTs TABELA INTEIRA:
 Select * from AGENDA;
