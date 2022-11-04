@@ -7,7 +7,7 @@ create table Gincana (
 	nome_Gincana varchar(45) not null,
 	ano_Gincana varchar(8) not null,
     descricao_Gincana varchar(120) not null,
-    data_Gincana varchar(45) not null
+    data_Gincana date not null
 );
 
 create table Agenda (
@@ -74,7 +74,7 @@ create table Galeria (
 
 create table Imagem (
 	id_Imagem int auto_increment not null primary key,
-    imagem_URL varchar(100) not null,
+    URL_Imagem varchar(100) not null,
     id_Galeria int,
     constraint fk_idGaleria_Imagem foreign key (id_Galeria)
 		references Galeria(id_Galeria)
@@ -104,8 +104,8 @@ create table Criterio (
 );
 
 create table Jurado (
-	idJurado int auto_increment not null primary key,
-    nomeJurado varchar(45) not null
+	id_Jurado int auto_increment not null primary key,
+    nome_Jurado varchar(45) not null
 );
 
 create table NotasCriterio (
