@@ -34,8 +34,8 @@ create table Evento (
 );
 
 create table Perfil (
-	idPerfil int auto_increment not null primary key,
-    cargoPerfil varchar(30) not null
+	id_Perfil int auto_increment not null primary key,
+    cargo_Perfil varchar(30) not null
 );
 
 create table Usuario (
@@ -48,9 +48,9 @@ create table Usuario (
     id_Gincana int,
     constraint fk_idGincana_Usuario foreign key (id_Gincana) 
 		references Gincana(id_Gincana),
-	idPerfil int,
-    constraint fk_idPerfil_Usuario foreign key (idPerfil)
-		references Perfil(idPerfil)
+	id_Perfil int,
+    constraint fk_idPerfil_Usuario foreign key (id_Perfil)
+		references Perfil(id_Perfil)
 );
 
 create table Equipe (
